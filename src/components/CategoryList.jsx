@@ -1,11 +1,24 @@
 import React from 'react';
 
-function CategoryList({ categories }) {
+function CategoryList({ categories, selectedCategory, onCategoryChange }) {
   return (
     <div className="categories-filter">
-      <button className="category-btn active">Kõik</button>
-      {categories.map((category, index) => (
-        <button key={index} className="category-btn">
+      <button
+        className={`category-btn${selectedCategory === '' ? ' active' : ''}`}
+        type="button"
+        aria-pressed={selectedCategory === ''}
+        onClick={() => onCategoryChange('')}
+      >
+        Kõik
+      </button>
+      {categories.map((category) => (
+        <button
+          key={category}
+          className={`category-btn${selectedCategory === category.toUpperCase() ? ' active' : ''}`}
+          type="button"
+          aria-pressed={selectedCategory === category.toUpperCase()}
+          onClick={() => onCategoryChange(category.toUpperCase())}
+        >
           {category}
         </button>
       ))}

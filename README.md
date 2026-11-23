@@ -43,6 +43,26 @@ You can learn more in the [Vite documentation](https://vitejs.dev/guide/).
 
 To learn Vitest, a Vite-native testing framework, go to [Vitest documentation](https://vitest.dev/guide/)
 
+## Kursuste komponentide hierarhia
+
+```text
+App (src/App.jsx)
+└── FavoritesProvider (src/contexts/FavoritesContext.jsx)
+    └── AppContent
+        ├── Header
+        │   └── Navigation
+        ├── PageHeading
+        ├── CategoryList
+        ├── CourseList (populaarsed ja filtreeritud kursused)
+        │   └── CourseCard
+        └── Footer
+```
+
+- Kursuste andmed (`id`, kategooria, nimi, kirjeldus, kestus ja populaarsuse lipp) asuvad `App.jsx`-is. `AppContent` filtreerib need nime, kategooria ja lemmikuvaate põhjal ning edastab `CourseList`-ile kursuste massiivi props'ina.
+- `CourseList` kuvab massiivi, edastades iga kursuse väljad `CourseCard`-ile props'idena. Kaart kasutab lemmikute ID-sid ja muutmise funktsiooni `FavoritesContext`-ist.
+- `CategoryList` saab kategooriad, valitud kategooria ning muutmise funktsiooni `AppContent`-ilt props'idena.
+- `Header` loeb lemmikute arvu samast `FavoritesContext`-ist. `FavoritesProvider` ümbritseb kogu `AppContent`-i, nii et päis ja mõlemad kursusenimekirjad jagavad üht lemmikute olekut.
+
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
